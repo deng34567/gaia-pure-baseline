@@ -1,0 +1,11 @@
+model_name: qwen35-9b
+base_url: http://127.0.0.1:8000/v1
+api_key: sk-12345
+timeout_seconds: 120
+max_tokens: 256
+temperature: 0.0
+gaia_data_dir: /path/to/GAIA
+split: validation
+level: 1
+limit: 50
+output_dir: results/qwen35_9b_l1

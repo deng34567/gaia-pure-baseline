@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+results/
+config.yaml
+.codex
+.DS_Store
