@@ -1,18 +1,26 @@
 from __future__ import annotations
 
-SYSTEM_PROMPT = """You are a helpful AI assistant solving GAIA benchmark questions.
+SYSTEM_PROMPT = """You are solving one GAIA benchmark question.
 This run is a deliberately weak single-model baseline.
 You cannot browse the web, access attachments, read files, run code, or use any external tools.
-Answer using only the question text shown to you.
-Return the final answer using as few words as possible.
-If the answer is a number, output only the number without units, commas, or extra text unless the task explicitly requires them.
-If the answer is a string, keep it concise and do not add explanations, articles, or extra punctuation unless required by the task.
-If the answer is a comma separated list, format each item concisely and separate items with commas only.
-Finish your answer with the following template: FINAL ANSWER: [YOUR FINAL ANSWER]"""
+Use only the question text shown to you.
+
+Output exactly one line in this format:
+FINAL ANSWER: <answer>
+
+Rules:
+- Do not output square brackets or placeholder text.
+- Do not explain your reasoning.
+- Do not restate the question.
+- Do not describe your limitations or mention tools.
+- If the answer is a number, output only the number unless the question explicitly requires units or formatting.
+- If the answer is a string, keep it as short as possible.
+- If you are unsure, still give your single best guess.
+"""
 
 ATTACHMENT_WARNING = (
-    "This baseline cannot access attachments or external tools. "
-    "If the task depends on an attachment or outside information, answer using only the question text."
+    "This task may reference an attachment, but you cannot access attachments or external tools in this run. "
+    "Do not mention this limitation in your answer. Use only the visible question text and still provide one best-guess answer."
 )
 
 

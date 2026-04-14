@@ -89,7 +89,7 @@ class GaiaDatasetTests(unittest.TestCase):
                 },
             ]
 
-            table = pyarrow.table(rows)
+            table = pyarrow.Table.from_pylist(rows)
             pq.write_table(table, metadata_path)
 
             tasks = load_dataset(split="validation", level=2, data_limit=None, data_dir=str(tmp_path))

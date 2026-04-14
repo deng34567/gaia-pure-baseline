@@ -17,6 +17,7 @@ def extract_final_answer(text: Optional[str]) -> Optional[str]:
 
     normalized = str(text).strip()
     parts = re.split(r"FINAL ANSWER:\s*", normalized, flags=re.IGNORECASE)
+    had_final_answer_marker = len(parts) > 1
     if len(parts) > 1:
         normalized = parts[-1].strip()
 
@@ -24,9 +25,10 @@ def extract_final_answer(text: Optional[str]) -> Optional[str]:
     normalized = re.sub(r"^\*\*|\*\*$", "", normalized).strip()
     lines = [line.strip() for line in normalized.splitlines() if line.strip()]
     if lines:
-        normalized = lines[0]
+        normalized = lines[0] if had_final_answer_marker else lines[-1]
 
     normalized = normalized.strip().strip("`").strip("\"' ")
+    normalized = re.sub(r"^(?:final answer\s*:\s*|answer\s*:\s*)", "", normalized, flags=re.IGNORECASE)
     normalized = re.sub(r"\s+", " ", normalized)
     normalized = normalized.rstrip(" .")
     return normalized
